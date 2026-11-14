@@ -1,55 +1,63 @@
-# Simulador Didático do Algoritmo de Tomasulo
+# tomasulo-simulator
 
-Este projeto é um simulador didático do algoritmo de Tomasulo com interface gráfica local (Tkinter), focado em instruções MIPS simplificadas, execução fora de ordem, estações de reserva, buffer de reordenação (ROB) e especulação de desvios.
+Simulador didático do algoritmo de Tomasulo com interface gráfica em Tkinter e instruções MIPS
 
-## Funcionalidades
-- Simulação passo a passo do algoritmo de Tomasulo
-- Suporte a instruções MIPS (exemplo em `mips_example.txt`)
-- Visualização de estações de reserva, tabela de registradores e ROB
-- Suporte à execução fora de ordem e especulação de desvios
-- Cálculo de métricas: IPC, ciclos totais, stalls, taxa de acerto de desvio (opcional)
+![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)
+![Tkinter](https://img.shields.io/badge/Tkinter-1F6AA5)
 
-## Requisitos
+## Sobre
+
+Trabalho acadêmico de arquitetura de computadores na PUC Minas, feito em grupo. O simulador executa passo a passo o algoritmo de Tomasulo para instruções MIPS simplificadas, com execução fora de ordem, estações de reserva, buffer de reordenação (ROB) e especulação de desvios. A interface mostra as estações de reserva, a tabela de registradores e o ROB, e calcula métricas como IPC, ciclos totais, stalls e taxa de acerto de desvio.
+
+O preditor de desvio é de 2 bits com saturação (detalhes em [`MELHORIA_PREDITOR.md`](MELHORIA_PREDITOR.md)). O simulador é didático: não cobre todos os detalhes do hardware real.
+
+Estrutura:
+
+- `core.py`: instrução, registradores, estações de reserva, ROB e preditor
+- `simulator.py`: ciclos e métricas
+- `gui.py`: interface gráfica
+- `mips_example.txt` e `exemplo_*.txt`: programas de exemplo (branch, paralelismo, RAW, WAR, WAW, ROB)
+
+## Tecnologias
+
 - Python 3.8+
-- Tkinter (já incluso na maioria das instalações Python)
+- Tkinter
 
-## Estrutura dos Arquivos
-- `core.py`: Estruturas centrais (instrução, registradores, RS, ROB, preditor)
-- `simulator.py`: Lógica do simulador, ciclos, métricas
-- `gui.py`: Interface gráfica (Tkinter)
-- `mips_example.txt`: Exemplo de instruções MIPS
-- `README.md`: Este arquivo
+## Como rodar
 
-## Como Executar
-1. Certifique-se de ter o Python instalado (Tkinter incluso)
-2. Clone ou baixe este repositório
-3. Execute o simulador:
+### Pré-requisitos
+
+- Python 3.8 ou superior com Tkinter (incluso na maioria das instalações)
+
+### Instalação
+
+```bash
+git clone https://github.com/LucasAlkmimBarros/tomasulo-simulator.git
+cd tomasulo-simulator
+```
+
+### Execução
 
 ```bash
 python gui.py
 ```
 
-4. Cole ou carregue um arquivo de instruções MIPS (exemplo: `mips_example.txt`)
-5. Use os botões para avançar ciclos, resetar ou visualizar métricas
+Cole ou carregue um programa MIPS (por exemplo, `mips_example.txt`) e use os botões para avançar ciclos, resetar ou ver as métricas. Linhas iniciadas por `#` são ignoradas.
 
-## Exemplo de Instruções MIPS
-Veja o arquivo `mips_example.txt` para um exemplo didático:
+Para ver o preditor de desvio em um teste simples:
 
-```
-ADDI R1, R0, 0
-ADDI R2, R0, 32
-ADDI F2, F0, 2
-
-LOOP: LD F0, 0(R1)
-MUL F4, F0, F2
-SD F4, 0(R1)
-ADDI R1, R1, 8
-BNE R1, R2, LOOP
+```bash
+python test_branch_predictor.py
 ```
 
-## Observações
-- Comentários em linhas iniciadas por `#` são ignorados
-- O simulador é didático: não cobre todos os detalhes do hardware real, mas ilustra os conceitos principais do algoritmo de Tomasulo
+## Equipe
+
+Trabalho desenvolvido em conjunto, com todos os integrantes atuando em todas as etapas.
+
+- [Lucas Alkmim](https://github.com/LucasAlkmimBarros)
+- [Fábio Andrade](https://github.com/fabioacandrade)
+- [Pedro Marçal Lima](https://github.com/pmarcallima)
 
 ## Licença
-MIT 
+
+Sem licença definida.
